@@ -1,0 +1,28 @@
+<h2 mat-dialog-title>Ajouter Un Offre</h2>
+<mat-dialog-content class="container">
+  <form [formGroup]="addOffForm" (ngSubmit)="onSubmit()">
+    <label>Categorie: </label>
+    <div class="container">
+        <mat-radio-group formControlName="categorie">
+          <mat-radio-button class="spacing" *ngFor="let cat of categories" [value]="cat.type" >{{cat.type}}</mat-radio-button>
+        </mat-radio-group>
+    </div>
+    <div class="row">
+      <mat-form-field class="col-md-6">
+        <mat-label>Offre</mat-label>
+        <input formControlName="offreTitle" matInput >
+      </mat-form-field>
+    </div>
+
+    <mat-form-field class="col-md-6">
+      <mat-label>Description</mat-label>
+      <textarea formControlName="description" matInput ></textarea>
+    </mat-form-field>
+    <div class="button-row ">
+      <button  mat-raised-button color="primary" type="submit">Ajouter</button>
+      <button  mat-raised-button color="warn">Clear</button>
+    </div>
+  </form>
+</mat-dialog-content>
+
+

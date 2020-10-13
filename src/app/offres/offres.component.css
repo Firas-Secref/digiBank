@@ -1,0 +1,20 @@
+.addButton{
+  background-color: darkgrey;
+  margin-top: 20px;
+  margin-left: 20px;
+}
+button{
+  margin: 5px;
+}
+
+.large-box {
+  height: 500px;
+  width: 900px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 16px;
+  padding: 16px;
+  border-radius: 8px;
+}
+

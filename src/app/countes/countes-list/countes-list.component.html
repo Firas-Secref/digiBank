@@ -1,0 +1,59 @@
+<div class="search-div">
+  <button mat-raised-button (click)= "onCreate()">
+    <mat-icon>add</mat-icon>Create
+  </button>
+  <mat-form-field class="search-form-field">
+    <input matInput [(ngModel)]="searchKey" placeholder="Search" autocomplete="off" (keyup)="applayFilter()">
+  </mat-form-field>
+  <button mat-button matSuffix mat-icon-button aria-label="Clear" *ngIf="searchKey" (click)="onSearchClear()">
+    <mat-icon>close</mat-icon>
+  </button>
+</div>
+<div class="mat-elevation-z8 position">
+  <mat-table [dataSource]="listData" matSort>
+
+    <ng-container matColumnDef="fullName">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Nom Et Prenom</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{element?.userName}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="cin">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>CIN</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{element?.CIN}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="mobile">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Telephone</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{element?.phoneNumber}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="birthDate">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Date De Naissance</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{element?.birthDate | date}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef = "loading">
+      <mat-footer-cell *matFooterCellDef colspan="6">
+        Loading data...
+      </mat-footer-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="offreName">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Offres</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{element?.offreName}}</mat-cell>
+    </ng-container>
+
+
+    <ng-container matColumnDef="actions">
+      <mat-header-cell *matHeaderCellDef></mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        <button mat-icon-button (click)= "onEdit(row)"><mat-icon>launch</mat-icon></button>
+        <button mat-icon-button (click)= "onDelete(row.$key)"><mat-icon>delete_outline</mat-icon></button>
+      </mat-cell>
+    </ng-container>
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+
+</mat-table>
+
+</div>

@@ -1,0 +1,35 @@
+form.normal-form{
+  margin: 10px;
+}
+.controles-container{
+  width: 100%;
+  padding: 5%;
+}
+.controles-container>*{
+  width: 100%;
+}
+.add-bottom-padding{
+  padding-bottom: 10px;
+}
+mat-radio-group mat-radio-button{
+  margin-left: 0px;
+  text-align: right;
+}
+.button-row button{
+  margin: 5px;
+}
+/* Notification */
+snack-bar-container.success{
+  background-color: #5cb85c;
+  color: #fff;
+}
+snack-bar-container.notification simple-snack-bar{
+  font-size: 18px !important;
+  font-weight: bold;
+}
+.fill-space {
+  flex: 1 1 auto;
+}
+.spacing{
+  padding-left: 20px;
+}

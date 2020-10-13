@@ -1,0 +1,14 @@
+.spacer{
+  flex: 1 1 auto ;
+}
+mat-icon{
+  font-size: 50px;
+}
+.icons{
+  margin-right: 60px;
+}
+mat-toolbar{
+  padding-top: 20px;
+  padding-bottom: 10px;
+  height: 75px;
+}

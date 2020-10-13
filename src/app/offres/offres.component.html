@@ -1,0 +1,13 @@
+<button mat-flat-button color="primary" class="addButton" (click)="openDialog()" (click)="addTab()">
+  <mat-icon>add</mat-icon>Ajouter un Offre
+</button>
+<br><br>
+
+<mat-tab-group [selectedIndex]="selected.value" (selectedIndexChange)="selected.setValue($event)">
+  <mat-tab *ngFor="let tab of offres; let index = index" [label]="tab.offreName">
+    <div class="large-box mat-elevation-z4">
+      {{tab.description}}
+    </div>
+    <button mat-raised-button class="example-delete-tab-button" [disabled]="tabs.length === 1" (click)="removeTab(index)">Delete Tab</button>
+  </mat-tab>
+</mat-tab-group>

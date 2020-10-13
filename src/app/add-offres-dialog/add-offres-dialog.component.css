@@ -1,0 +1,17 @@
+.fill-space {
+  flex: 1 1 auto;
+}
+.button-row button{
+  margin: 5px;
+}
+.add-bottom-padding{
+  padding-bottom: 10px;
+}
+.spacing{
+  padding-left: 20px;
+  font-size: small;
+}
+h2{
+  text-align: center;
+}
+

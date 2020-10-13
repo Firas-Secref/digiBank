@@ -1,0 +1,39 @@
+<!-- <div class="row">
+  <div class="col-sm-8 col-sm-offset-2">
+    <h2>Connexion</h2>
+    <form [formGroup]="signinForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="email">Adresse mail</label>
+        <input type="text"
+               id="email"
+               class="form-control"
+               formControlName="email">
+      </div>
+      <div class="form-group">
+        <label for="password">Mot de passe</label>
+        <input type="password"
+               id="password"
+               class="form-control"
+               formControlName="password">
+      </div>
+      <button class="btn btn-primary"
+              type="submit"
+              [disabled]="signinForm.invalid">Connexion</button>
+    </form>
+    <p class="text-danger">{{ errorMessage }}</p>
+  </div>
+</div> -->
+
+<div class="wrapper fadeInDown">
+  <div id="formContent">
+    <!-- Tabs Titles -->
+
+    <!-- Login Form -->
+    <form  [formGroup]="signinForm" (click)="onSubmit()">
+      <input formControlName="email" type="text" id="login" class="fadeIn second" name="login" placeholder="Login">
+      <input formControlName="password" type="password" id="password" class="fadeIn third" name="login" placeholder="Password">
+      <input type="submit" class="fadeIn fourth" value="Log In">
+      <p class="text-danger">{{ errorMessage }}</p>
+    </form>
+  </div>
+</div>
