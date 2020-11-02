@@ -15,7 +15,6 @@ export class CountFormService {
 
 
   form: FormGroup = new FormGroup ({
-    $key: new FormControl(''),
     fullName: new FormControl('', Validators.required),
     birthDate: new FormControl(''),
     mobile: new FormControl('', [Validators.required, Validators.minLength(8)]),
@@ -26,7 +25,6 @@ export class CountFormService {
 
    InitializeFormGroup(){
     this.form.setValue({
-      $key: null,
       fullName: '',
       mobile: '',
       cin: '',

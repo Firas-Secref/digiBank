@@ -10,6 +10,8 @@ import { Component, OnInit } from '@angular/core';
 import {MatDialogRef} from '@angular/material/dialog';
 import { InteractionService } from '../../shared/interaction.service';
 import * as firebase from 'firebase';
+import { FileValidator } from 'ngx-material-file-input';
+
 import DataSnapshot = firebase.database.DataSnapshot;
 @Component({
   selector: 'app-count-form',
@@ -23,6 +25,10 @@ export class CountFormComponent implements OnInit {
   userName: string;
   offres: any[];
   categories : any[];
+ fileUrl: string;
+  fileIsUploading = false;
+
+  fileUploaded = false;
 
   constructor( private prospectService: ProspectService ,
                private service: CountFormService,
@@ -36,11 +42,6 @@ export class CountFormComponent implements OnInit {
    }
 
   ngOnInit(): void {
-
-    this.userName = this.interactionService.getMsg();
-    console.log('username',this.userName);
-
-
     firebase.database().ref('/offres').on('value', (data: DataSnapshot) => {
       this.offres = data.val() ? data.val() : [];
       this.allOffersService.emitOffres();
@@ -66,9 +67,10 @@ export class CountFormComponent implements OnInit {
       prospectName: ['', [Validators.required]],
       cin: ['', [Validators.required]],
       phoneNumber: ['', [Validators.required]],
-      categorieName: ['', [Validators.required]],
+      photo: ['', [Validators.required]],
       birthDate: ['', [Validators.required]],
-      offreName: ['', []]
+      offreName: ['', []],
+      address: ['', []]
     })
   }
 
@@ -85,13 +87,21 @@ export class CountFormComponent implements OnInit {
       const cin = this.countForm.get('cin').value;
       const phoneNumber = this.countForm.get('phoneNumber').value;
       const birthDate =  Date.parse(this.countForm.get('birthDate').value);
+
+      // const photo ='1111';
+      const address = this.countForm.get('address').value;
       console.log(birthDate);
 
       const offreName = this.countForm.get('offreName').value;
 
-      const newProspect = new Prospect(prospectName, cin, phoneNumber, birthDate, offreName )
+      const newProspect = new Prospect(prospectName, cin, phoneNumber, birthDate, offreName,  address );
+      if (this.fileUrl && this.fileUrl !== '') {
+        newProspect.photo = this.fileUrl;
+      }
       newProspect.userName = this.userName;
       this.prospectService.addNewProspect(newProspect);
+
+
       this.notification.success(':: Submitted successfully');
 
 
@@ -124,6 +134,20 @@ export class CountFormComponent implements OnInit {
 
   getValue(){
     // return this.service.form.get('offers').value;
+  }
+
+  detectFiles(event) {
+    this.onUploadFile(event.target.files[0]);
+  }
+  onUploadFile(file: File) {
+    this.fileIsUploading = true;
+    this.prospectService.uploadFile(file).then(
+      (url: string) => {
+        this.fileUrl = url;
+        this.fileIsUploading = false;
+        this.fileUploaded = true;
+      }
+    );
   }
 
 }

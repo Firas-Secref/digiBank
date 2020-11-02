@@ -24,7 +24,7 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.id = this.route.snapshot.paramMap.get('id')
+    this.id = this.route.snapshot.paramMap.get('id');
     console.log('tring', this.id);
     this.interactionService.sendId(this.id);
 
@@ -33,5 +33,20 @@ export class DashboardComponent implements OnInit {
   onClick(){
     this.router.navigate(['dashboard/userId/' + this.id + '/offers']);
   }
+  suite(x: number){
+    let dots = document.getElementById("dots"+x);
+    let moreText = document.getElementById("more"+x);
+    let btnText = document.getElementById("myBtn"+x);
+
+    if (dots.style.display === "none") {
+      dots.style.display = "inline";
+      btnText.innerHTML = "Suite";
+      moreText.style.display = "none";
+    } else {
+      dots.style.display = "none";
+      btnText.innerHTML = "Masquer";
+      moreText.style.display = "inline";
+    }
+}
 
 }

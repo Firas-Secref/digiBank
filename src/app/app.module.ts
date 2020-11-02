@@ -12,6 +12,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { HeaderComponent } from './header/header.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
@@ -25,7 +26,10 @@ import { OffresComponent } from './offres/offres.component';
 import { AddOffresDialogComponent } from './add-offres-dialog/add-offres-dialog.component';
 
 
-
+import { MaterialFileInputModule } from 'ngx-mat-file-input';
+import { SinglProspectComponent } from './countes/singl-prospect/singl-prospect.component';
+import { SingleOffreComponent } from './offres/single-offre/single-offre.component';
+import { OwnProsspectsComponent } from './countes/own-prosspects/own-prosspects.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +42,10 @@ import { AddOffresDialogComponent } from './add-offres-dialog/add-offres-dialog.
     CountesListComponent,
     CountFormComponent,
     OffresComponent,
-    AddOffresDialogComponent
+    AddOffresDialogComponent,
+    SinglProspectComponent,
+    SingleOffreComponent,
+    OwnProsspectsComponent
   ],
   imports: [
     BrowserModule,
@@ -48,7 +55,8 @@ import { AddOffresDialogComponent } from './add-offres-dialog/add-offres-dialog.
     AngularFireAuthModule,
     AppRoutingModule,
     MaterialModule,
-    
+    MaterialFileInputModule,
+
     AngularFireModule.initializeApp(environment.firebaseConfig),
 
     AngularFireDatabaseModule,

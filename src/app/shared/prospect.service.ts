@@ -10,6 +10,7 @@ import DataSnapshot = firebase.database.DataSnapshot;
 })
 export class ProspectService {
   prospects: Prospect[] = [];
+  prospect: Prospect;
   prospectsLength: number;
   prospectsSubject = new Subject<Prospect[]>();
 
@@ -59,11 +60,71 @@ export class ProspectService {
     }) ;
     //of(true)
   }
-listenToGetTest() {
-  this.gettest().subscribe(result => {
-    console.log(result) ; // true 100
-  },
-  (error) => {console.log(error);} // false
-  )
+  listenToGetTest() {
+    this.gettest().subscribe(result => {
+      console.log(result) ; // true 100
+    },
+      (error) => {console.log(error);} // false
+    )
+  }
+
+  uploadFile(file: File) {
+    return new Promise(
+      (resolve, reject) => {
+        const almostUniqueFileName = Date.now().toString();
+        const upload = firebase.storage().ref('/prospects')
+          .child('photo/' + almostUniqueFileName + file.name).put(file);
+        upload.on(firebase.storage.TaskEvent.STATE_CHANGED,
+          () => {
+            console.log('Chargement…');
+          },
+          (error) => {
+            console.log('Erreur de chargement ! : ' + error);
+            reject();
+          },
+          () => {
+            resolve(upload.snapshot.ref.getDownloadURL());
+          }
+        );
+      }
+    );
+  }
+
+  getSingleProspect(id: number) {
+    return new Promise(
+      (resolve, reject) => {
+        firebase.database().ref('/prospects/' + id).once('value').then(
+          (data: DataSnapshot) => {
+            resolve(data.val());
+          }, (error) => {
+            reject(error);
+          }
+        );
+      }
+    );
+  }
+
+  removeProspect(prospect: Prospect) {
+    if(prospect.photo) {
+      const storageRef = firebase.storage().refFromURL(prospect.photo);
+      storageRef.delete().then(
+        () => {
+          console.log('Photo removed!');
+        },
+        (error) => {
+          console.log('Could not remove photo! : ' + error);
+        }
+      );
+    }
+    const prospectIndexToRemove = this.prospects.findIndex(
+      (prospectEl) => {
+        if(prospectEl === prospect) {
+          return true;
+        }
+      }
+    );
+    this.prospects.splice(prospectIndexToRemove, 1);
+    this.saveProspects();
+    this.emitProspects();
 }
 }

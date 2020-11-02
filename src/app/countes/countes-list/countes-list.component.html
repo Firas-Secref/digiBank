@@ -1,15 +1,11 @@
-<div class="search-div">
-  <button mat-raised-button (click)= "onCreate()">
-    <mat-icon>add</mat-icon>Create
-  </button>
-  <mat-form-field class="search-form-field">
-    <input matInput [(ngModel)]="searchKey" placeholder="Search" autocomplete="off" (keyup)="applayFilter()">
-  </mat-form-field>
-  <button mat-button matSuffix mat-icon-button aria-label="Clear" *ngIf="searchKey" (click)="onSearchClear()">
-    <mat-icon>close</mat-icon>
-  </button>
-</div>
-<div class="mat-elevation-z8 position">
+<br><br>
+  <div class="search-div">
+    <button mat-raised-button (click)= "onCreate()">
+      <mat-icon>add</mat-icon>Ajouter un nouveau prospect
+    </button>
+  </div>
+
+<!-- <div class="mat-elevation-z8 position">
   <mat-table [dataSource]="listData" matSort>
 
     <ng-container matColumnDef="fullName">
@@ -54,6 +50,78 @@
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
 
-</mat-table>
-00
-</div>
+</mat-table> -->
+
+<!-- </div> -->
+<br><br><br>
+<section id="team-page">
+  <div class="container">
+    <div class="list-team-members">
+      <ul>
+        <li class="d-flex align-items-center mb-2 ">
+          <div class="marge col-lg-2">
+            <span class="font-weight-bold">Nom Et Prenom</span>
+          </div>
+          <div class="marge col-lg-2">
+            <span class="font-weight-bold">CIN</span>
+          </div>
+          <div class="marge col-lg-2">
+            <span class="font-weight-bold">Telephone</span>
+          </div>
+          <div class="marge col-lg-2">
+            <span class="font-weight-bold">Date De Naissance</span>
+          </div>
+          <div class="marge m col-lg-2">
+            <span class="font-weight-bold">Offres</span>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="team-page">
+  <div class="container">
+    <div class="list-team-members">
+      <ul>
+        <li *ngFor="let prosp of prospects; let i= index"  class="d-flex align-items-center mb-2">
+          <div class="cont-user-wrapper col-lg-2">
+            <div class="d-flex align-items-center  w-30">
+              <div class="user-photo">
+                <img  [src]="prosp?.photo" alt="img avatar">
+              </div>
+              <div class="name ml-2">
+                <span class="font-weight-bold">{{prosp?.prospectName}}</span>
+              </div>
+            </div>
+          </div>
+          <div class="email col-lg-2">
+            <p>{{prosp?.CIN}}</p>
+          </div>
+          <div class="role text-center col-lg-2">
+            <p>{{prosp?.phoneNumber}}</p>
+          </div>
+
+          <div class="role text-center col-lg-2">
+            <p>{{prosp?.birthDate| date}}</p>
+          </div>
+
+          <div class="role text-center col-lg-2">
+            <p>{{prosp?.offreName}}</p>
+          </div>
+
+          <div class="action col-lg-2 text-center dropdown">
+            <a style="color: #888888;" class="dropdown-toggle"  data-toggle="dropdown" aria-haspopup="true"
+              aria-expanded="false"><i class="icon ion-android-settings"
+                style="font-size: 30px;color: #888888;"></i></a>
+            <div class="dropdown-menu">
+              <a class="dropdown-item"  (click)="onViewProspect(i)">Consulter</a>
+              <a class="dropdown-item" *ngIf="prosp.userName === userName" (click)="onUpdateProspect(i)">Modifier</a>
+              <a class="dropdown-item" *ngIf="prosp.userName === userName" (click)="onDeleteProspect(prosp)" >Supprimer</a>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>

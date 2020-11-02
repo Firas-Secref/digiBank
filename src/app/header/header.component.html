@@ -24,13 +24,63 @@
   </div>
 </nav> -->
 
-<mat-toolbar color='primary'>
+<!-- <mat-toolbar color='primary'>
   <a *ngIf="isAuth" routerLink="accounts"><mat-icon class="icons" [matBadge]="accountNumber" matBadgePosition="before" matBadgeOverlap="true"  matBadgeColor="warn">supervised_user_circle</mat-icon></a>
   <a *ngIf="isAuth" class="icons" routerLink="dashboard"><mat-icon mat-raised-button>dashboard</mat-icon></a>
   <div class="spacer"></div>
     <a routerLink="auth/signin" *ngIf="!isAuth" mat-raised-button color='accent'>Connexion</a>
     <a routerLink="auth/signin" (click)="onSignOut()" *ngIf="isAuth" mat-raised-button color='accent'>Déconnexion</a>
-</mat-toolbar>
+</mat-toolbar> -->
+
+<div *ngIf="isAuth"  class="wrapper d-flex align-items-stretch">
+  <nav  id="sidebar">
+    <div class="p-4 pt-5">
+      <!-- <a href="#" class="img logo rounded-circle mb-5" style="background-image: url(images/logo.jpg);"></a> -->
+      <img class="img logo rounded-circle mb-5" [src]="photo">
+      <ul class="list-unstyled components mb-5">
+        <li class="active">
+          <a href="#homeSubmenu" >Mon Compte</a>
+        </li>
+        <li>
+          <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Liste De Prospects</a>
+          <ul class="collapse list-unstyled" id="pageSubmenu">
+            <li>
+                <a [routerLink] = "['/accounts/prospectsPersonel']">Mes Prospects</a>
+            </li>
+            <li>
+                <a [routerLink]="['/accounts']">Tous Les Prospects</a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a [matBadge]="offreNumber">Les Offres Diponibles</a>
+        </li>
+        <li>
+          <a href="#">Contact</a>
+        </li>
+        <li>
+          <a routerLink="auth/signin" (click)="onSignOut()" *ngIf="isAuth">Deconnection</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+    <!-- Page Content  -->
+  <div id="content" class="p-4 p-md-5">
+        <button type="button" id="sidebarCollapse" class="btn btn-primary">
+          <i class="fa fa-bars"></i>
+          <span class="sr-only">Toggle Menu</span>
+        </button>
+    <router-outlet></router-outlet>
+      </div>
+
+</div>
+
+<script src="js/jquery.min.js"></script>
+<script src="js/popper.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/main.js"></script>
+
 
 
 

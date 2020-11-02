@@ -10,6 +10,7 @@ export class InteractionService {
    _accountNumber = new Subject<number>();
    _id = new Subject<string>();
    _userName: string;
+   length: number;
 
   offersUserId$ = this._id.asObservable();
   headerNumber$ = this._accountNumber.asObservable();
@@ -27,6 +28,12 @@ export class InteractionService {
     // this._userName.next(userName);
     // console.log('user name sended successfully');
     this._userName = userName;
+  }
+  sendNumber(nb: number){
+    this.length = nb;
+  }
+  getNumber(){
+    return this.length;
   }
 
   getMsg(){

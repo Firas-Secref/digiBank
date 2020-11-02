@@ -24,6 +24,9 @@ export class AddOffresDialogComponent implements OnInit {
   addOffForm: FormGroup;
   user: User;
   categories : any[];
+  fileIsUploading = false;
+  fileUploaded = false;
+  fileUrl: string;
   constructor(private dialog: MatDialog,
               private route: ActivatedRoute,
               private formBuilder: FormBuilder,
@@ -37,7 +40,7 @@ export class AddOffresDialogComponent implements OnInit {
               //addOffForm= this.service.addOffForm;
   ngOnInit(): void {
 
-    this.categoriesService.getCat()
+    this.categoriesService.getCat();
 
     this.categoriesService.getCategories().subscribe(result => {
       console.log('next', result) ;
@@ -80,7 +83,8 @@ export class AddOffresDialogComponent implements OnInit {
     this.addOffForm = this.formBuilder.group({
       categorie: [ '', [Validators.required]],
       offreTitle: [ '', [Validators.required]],
-      description: [ '', [Validators.required]]
+      description: [ '', [Validators.required]],
+      photo: [ '', [Validators.required]]
     });
   }
 
@@ -99,8 +103,10 @@ export class AddOffresDialogComponent implements OnInit {
     const description = this.addOffForm.get('description').value;
 
     const newOffre = new Offre(offreName, categorie, description);
+    if (this.fileUrl && this.fileUrl !== '') {
+      newOffre.photo = this.fileUrl;
+    }
     newOffre.userName = this.userName;
-    console.log(newOffre);
 
     this.allOffersService.createNewOffre(newOffre);
     this.notification.success(':: Submitted successfully');
@@ -109,6 +115,20 @@ export class AddOffresDialogComponent implements OnInit {
     // if (this.addOffForm.valid){
     //   this.service.addOffre(this.service.addOffForm.value);
     // }
+  }
+
+  detectFiles(event) {
+    this.onUploadFile(event.target.files[0]);
+  }
+  onUploadFile(file: File) {
+    this.fileIsUploading = true;
+    this.allOffersService.uploadFile(file).then(
+      (url: string) => {
+        this.fileUrl = url;
+        this.fileIsUploading = false;
+        this.fileUploaded = true;
+      }
+    );
   }
 
 

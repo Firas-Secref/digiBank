@@ -18,6 +18,10 @@ export class SignupComponent implements OnInit {
   user:User;
   signupForm: FormGroup;
   errorMessage: string;
+
+  fileIsUploading = false;
+  fileUrl: string;
+  fileUploaded = false;
   constructor(private formBuilder: FormBuilder, private authService: AuthService,
      private router: Router, private userService: UserService) { }
 
@@ -57,9 +61,10 @@ export class SignupComponent implements OnInit {
     const userName = this.signupForm.get('userName').value;
 
     const newUser = new User(email, userName, password);
-    const photo = '';
 
-    newUser.photo = photo;
+    if (this.fileUrl && this.fileUrl !== '') {
+      newUser.photo = this.fileUrl;
+    }
     this.userService.addNewUser(newUser);
     this.authService.createNewUser(email, password).then(
       () => {
@@ -71,6 +76,21 @@ export class SignupComponent implements OnInit {
         this.errorMessage = error;
       }
     );
+  }
+
+  onUploadFile(file: File) {
+    this.fileIsUploading = true;
+    this.userService.uploadFile(file).then(
+      (url: string) => {
+        this.fileUrl = url;
+        this.fileIsUploading = false;
+        this.fileUploaded = true;
+      }
+    );
+  }
+
+  detectFiles(event) {
+    this.onUploadFile(event.target.files[0]);
   }
 
 }

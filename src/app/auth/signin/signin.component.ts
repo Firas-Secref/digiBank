@@ -5,6 +5,8 @@ import { Router } from '@angular/router';
 import { UserService } from 'src/app/shared/user.service';
 import { User } from 'src/app/models/user.model';
 import { InteractionService } from 'src/app/shared/interaction.service';
+import * as firebase from 'firebase';
+
 
 
 
@@ -20,11 +22,17 @@ export class SigninComponent implements OnInit {
   id: number;
   signinForm: FormGroup;
   errorMessage: string;
-  constructor(private interactionService: InteractionService, private formBuilder: FormBuilder, private authService: AuthService, private router: Router, private userService: UserService) { }
+  isAuth= false;
+  authentifier: boolean;
+
+  constructor(private interactionService: InteractionService,
+              private formBuilder: FormBuilder, private authService: AuthService,
+              private router: Router, private userService: UserService) { }
 
   ngOnInit(): void {
     this.initForm();
     this.userService.getUsers();
+    console.log(this.isAuth);
   }
 
   initForm(): void {
@@ -46,15 +54,28 @@ export class SigninComponent implements OnInit {
           this.userService.getSingleUser(id).then(
             (user: User) => {
               this.user = user;
-              console.log('user is', user);
+
 
               if (user && user.email === email) {
-                console.log(user.userName);
                 this.id = id;
                 this.userName = user.userName;
                 localStorage.setItem('userName',user.userName);
                 this.interactionService.sendUserName(this.userName);
                 this.router.navigate(['/dashboard/' + id]);
+                localStorage.setItem('image', this.user.photo);
+                firebase.auth().onAuthStateChanged(
+                  (user) => {
+                    if (user) {
+                      this.isAuth = true;
+                      localStorage.setItem('authentifier', 'oui' );
+
+                    } else {
+                      this.isAuth = false;
+                      localStorage.setItem('authentifier', 'non' );
+
+                    }
+                  }
+                );
               }
             }
           );
@@ -67,6 +88,12 @@ export class SigninComponent implements OnInit {
       }
     );
 
+    console.log(this.isAuth);
+
+
   }
+
+
+
 
 }

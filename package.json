@@ -11,6 +11,7 @@
   },
   "private": true,
   "dependencies": {
+    "@angular-material-components/file-input": "^4.0.1",
     "@angular/animations": "~10.0.6",
     "@angular/cdk": "^10.2.0",
     "@angular/common": "~10.0.6",
@@ -25,11 +26,14 @@
     "@firebase/auth": "^0.14.9",
     "@firebase/firestore": "^1.16.7",
     "angular-bootstrap-md": "^9.4.0",
+    "angular-material-fileupload": "^3.0.1",
     "angularfire2": "^5.0.0-rc.9",
     "bootstrap": "^4.5.2",
     "firebase": "^7.20.0",
     "lodash": "^4.17.20",
     "lodash-es": "^4.17.15",
+    "ngx-mat-file-input": "^3.0.0-beta.0",
+    "ngx-material-file-input": "^2.1.1",
     "rxjs": "~6.5.5",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.3"

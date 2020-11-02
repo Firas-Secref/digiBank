@@ -18,3 +18,82 @@ button{
   border-radius: 8px;
 }
 
+/* ................. */
+
+
+p{
+  font-size:9px;
+}
+a{
+text-decoration:none;
+color: #0062cc;
+border-bottom:2px solid #0062cc;
+}
+.box{
+  padding:60px 0px;
+}
+
+.box-part{
+  background:#FFF;
+  border-radius:0;
+  padding:18px 10px;
+  margin:30px 0px;
+  background-color : #bec8d1  ;
+
+}
+
+.fa{
+   color:#4183D7;
+}
+
+
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+
+  border-radius: 5px;
+  background-color : #bec8d1  ;
+
+}
+
+.card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+img {
+  border-radius: 5px 5px 0 0;
+  background-color : #0062cc  ;
+
+}
+
+
+
+.Image{
+  border-radius: 10%;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+
+    width: 90%;
+    height: 200px;
+    margin-top: 5px;
+    border: 2px solid;
+    border-width: 2px;
+    border-color: cornflowerblue;
+
+
+
+}
+.text{
+  font-family: Georgia, serif;
+  font-size: 1;
+}
+.col-md-3{
+  background-color : #bec8d1  ;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  margin: 10px;
+  border-radius: 5px;
+}
+.title{
+  padding-top: 7px;
+}
+
+
+

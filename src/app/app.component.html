@@ -1,4 +1,5 @@
-<app-header></app-header>
-<div class="container">
-  <router-outlet></router-outlet>
-</div>
+
+<app-signin *ngIf="!isAuth"></app-signin>
+<app-header *ngIf="isAuth"></app-header>
+
+

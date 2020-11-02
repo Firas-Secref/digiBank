@@ -56,7 +56,12 @@ export class OffresComponent implements OnInit {
 
       console.log('just values offres!', Object.values(result)) ;
       this.offres = Object.values(result) ;
+      // this.offres.find(element=>)
+
       console.log('000',this.offres);
+
+      this.interactionService.sendNumber(Object.values(result).length);
+
 
     })
 
@@ -122,4 +127,9 @@ export class OffresComponent implements OnInit {
     this.tabs.splice(index, 1);
     // index will be replaced by
   }
+
+  showOffre(id: number) {
+    this.router.navigate(['/offre', 'view', id]);
+  }
+
 }

@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { ProspectService } from './../../shared/prospect.service';
 import { Prospect } from './../../models/prospects.model';
 import { InteractionService } from './../../shared/interaction.service';
@@ -23,13 +24,15 @@ export class CountesListComponent implements OnInit {
 
   prospects: Prospect[] = [];
   prospectsLength: number;
+  prospect: Prospect;;
 
   constructor(private service: CountFormService,
               private categoriesService: CategoriesService,
               private dialog: MatDialog,
               private notificationService: NotificationService,
               private interactionService: InteractionService,
-              private prospectService: ProspectService) { }
+              private prospectService: ProspectService,
+              private router: Router) { }
   listData: MatTableDataSource<any>;
   displayedColumns: string[] = ['fullName', 'cin', 'mobile', 'birthDate', 'offreName', 'actions'];
 
@@ -41,7 +44,7 @@ export class CountesListComponent implements OnInit {
   ngOnInit(): void {
    this.userName = localStorage.getItem('userName');
 
-   firebase.database().ref('/prospects').orderByChild('userName').equalTo(this.userName).on('value', (data: DataSnapshot) => {
+   firebase.database().ref('/prospects').on('value', (data: DataSnapshot) => {
     this.prospects = data.val() ? data.val() : [];
     this.prospectService.emitProspects();
     this.listData = new MatTableDataSource(this.prospects);
@@ -96,5 +99,18 @@ export class CountesListComponent implements OnInit {
       this.service.deleteCount($key);
       this.notificationService.warn('! Deleted successfully');
     }
+  }
+  onViewProspect(id: number){
+    this.router.navigate(['/accounts', 'view', id]);
+  }
+  onUpdateProspect(id: number){
+
+  }
+  onDeleteProspect(prospect: Prospect){
+    if (confirm('Voulez-vous vraiment supprimer ce prospect !?')) {
+      this.prospectService.removeProspect(prospect);
+      this.notificationService.warn('! Supprimer Avec Succés');
+    }
+
   }
 }

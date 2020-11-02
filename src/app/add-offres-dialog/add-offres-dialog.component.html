@@ -7,17 +7,33 @@
           <mat-radio-button class="spacing" *ngFor="let cat of categories" [value]="cat.type" >{{cat.type}}</mat-radio-button>
         </mat-radio-group>
     </div>
+    <br>  <label class="label" >Photo</label>
+
+    <div class="row-space ">
+      <div class="input-group js-input-file col-md-10 ">
+          <input formControlName= "photo" class="input-file" type="file" name="file_cv" id="file" (change)="detectFiles($event)"  accept="image/*">
+          <label class="label--file " for="file">Choose file</label>
+          <p class="text-success" *ngIf="fileUploaded" >Fichier chargé !</p>
+      </div>
+  </div>
     <div class="row">
       <mat-form-field class="col-md-6">
         <mat-label>Offre</mat-label>
         <input formControlName="offreTitle" matInput >
       </mat-form-field>
+
+
+    </div>
+    <div class="row">
+      <mat-form-field class="col-md-6">
+        <mat-label>Description</mat-label>
+        <textarea formControlName="description" matInput ></textarea>
+      </mat-form-field>
     </div>
 
-    <mat-form-field class="col-md-6">
-      <mat-label>Description</mat-label>
-      <textarea formControlName="description" matInput ></textarea>
-    </mat-form-field>
+
+
+
     <div class="button-row ">
       <button  mat-raised-button color="primary" type="submit">Ajouter</button>
       <button  mat-raised-button color="warn">Clear</button>

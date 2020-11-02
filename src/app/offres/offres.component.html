@@ -1,7 +1,7 @@
 <button mat-flat-button color="primary" class="addButton" (click)="openDialog()" (click)="addTab()">
   <mat-icon>add</mat-icon>Ajouter un Offre
 </button>
-<br><br>
+<!-- <br><br>
 
 <mat-tab-group [selectedIndex]="selected.value" (selectedIndexChange)="selected.setValue($event)">
   <mat-tab *ngFor="let tab of offres; let index = index" [label]="tab.offreName">
@@ -10,4 +10,33 @@
     </div>
     <button mat-raised-button class="example-delete-tab-button" [disabled]="tabs.length === 1" (click)="removeTab(index)">Delete Tab</button>
   </mat-tab>
-</mat-tab-group>
+</mat-tab-group> -->
+
+<!--  -->
+
+
+
+
+  <div class="row">
+
+     <div *ngFor="let tab of offres; let i = index" class="col-md-3" >
+
+     <div class="box-part text-center" [matBadge]="0">
+
+                   <img class="Image" [src]="tab.photo" alt="">
+
+       <div class="title">
+         <h4><b>{{tab.offreName}}</b></h4>
+       </div><hr>
+
+       <div class="text">
+         <p>{{tab.description| slice:0:200}}...</p>
+       </div>
+
+       <a (click)="showOffre(i)">Voire Plus</a>
+
+      </div>
+   </div>
+
+</div>
+
